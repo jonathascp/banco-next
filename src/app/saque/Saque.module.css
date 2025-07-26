@@ -1,0 +1,22 @@
+.button {
+    background: none;
+    border: none;
+    font-weight: bold;
+}
+
+.input_valor {
+    width: 200px;
+    border: none;
+    background: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 28px;
+    border: 1px solid;
+}
+
+.selected {
+    background-color: lightgreen;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px;
+}

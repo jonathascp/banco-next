@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 270px;
+    height: 420px;
+}
+
+.container_link {
+    text-decoration: none;
+    font-weight: bold;
+    color: darkgrey;
+    font-size: 1.23rem;
+}
+
+.container_link:hover {
+    color: black;
+}

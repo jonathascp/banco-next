@@ -1,0 +1,41 @@
+.container {
+    width: 350px;
+    background: lightgreen;
+    padding: 5px;
+}
+
+.container_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container_top > button {
+    background: none;
+    border: none;
+}
+
+.container_top > button:hover {
+    color: darkgreen;
+}
+
+.saldo {
+    display: flex;
+}
+
+.saldo_valor_input {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    outline: none;
+    cursor: default;
+
+}
+
+.verSaldo {
+    border: none;
+    cursor: default;
+    outline: none;
+    background: none;
+}

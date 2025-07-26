@@ -1,0 +1,20 @@
+.input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: green;
+    font-weight: bold;
+    font-size: 2.6rem;
+    text-align: center;
+}
+
+.button {
+    width: 100px;
+    margin-top: 10px;
+    background: lightgreen;
+    border-radius: 5px;
+    padding: 5px;
+    color: #fff;
+    border: none;
+
+}
