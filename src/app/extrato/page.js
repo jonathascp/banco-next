@@ -12,7 +12,7 @@ export default function Page() {
                     <p>{e.id}</p>
                     <p>{e.data}</p>
                     <p>{e.tipo}</p>
-                    <p>{e.tipo === "deposito" ? "+" : "-"} {e.transacao.toLocaleString("pt-BR",{style: "currency",currency: "BRL"})}</p>
+                    <p>{e.tipo === "depositar" ? "+" : "-"} {e.transacao.toLocaleString("pt-BR",{style: "currency",currency: "BRL"})}</p>
                 </div>
                )}
             </div>

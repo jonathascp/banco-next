@@ -3,17 +3,16 @@ import { useRef, useState } from "react";
 import styles from "./Saque.module.css";
 import CardTransacao from "../Components/Card_Transacao";
 import Carregamento from "../Components/Carregamento";
-import { useSaldo } from "../Context/SaldoContext";
-import Erro from "../Erro";
-import Sucesso from "../Sucesso";
+import Erro from "../Components/Erro";
+import Sucesso from "../Components/Sucesso";
+import { useEstado } from "../Context/EstadoContext";
 
 export default function Page() {
-    const [estadoPagina, setEstadoPagina] = useState("inicio");
+    const {estado,setEstado} = useEstado(); 
     const [transacao, setTransacao] = useState("");
     const [depositar, setDepositar] = useState(false);
     const [valor, setValor] = useState(0);
     const [tipoVerificado,setTipoVerificado] = useState({});
-    const {saldo} = useSaldo();
     const inputRef = useRef(null);
 
     const handleChange = (e) => {
@@ -31,23 +30,31 @@ export default function Page() {
 
     return (
         <>
-            {estadoPagina === "carregando" && <Carregamento valor={valor} tipoTransacao={transacao} finalVerificacao={(e) => setTipoVerificado(e)} estadoPagina={(e) => setEstadoPagina(e)} />}
-            
-            {estadoPagina === "erro" && <Erro />}
-            {estadoPagina === "sucesso" && <Sucesso />}
-            {estadoPagina === "inicio" && <div className={`m-auto mt-4 w-75`}>
+            {estado === "carregando" && 
+            <Carregamento 
+            valor={valor} 
+            tipoTransacao={transacao} 
+            finalVerificacao={(e) => setTipoVerificado(e)}
+            />
+            }
+            {estado === "erro" && <Erro />}
+            {estado === "sucesso" && <Sucesso />}
+            {estado === "inicio" && 
+            <div className={`m-auto mt-4 w-75`}>
                 <h2 className="text-center mb-4">Saque/Depósito</h2>
                 <div className="d-flex flex-column align-items-center justify-content-center">
                     <div>
                         <button onClick={() => {
                             setDepositar(false);
+                            setValor(0);
                         }}
                             className={`${styles.button} ${depositar ? "" : styles.selected}`}>
                             Sacar
                         </button>
 
                         <button onClick={() => {
-                            setDepositar(true)
+                            setDepositar(true);
+                            setValor(0);
                         }}
                             className={`${styles.button} ${depositar ? styles.selected : ""}`}>
                             Depositar
@@ -59,8 +66,9 @@ export default function Page() {
                             onChange={handleChange}
                             valor={valor}
                             funcaoBotao={() => {
-                                setEstadoPagina("carregando")
+                                setEstado("carregando")
                                 setTransacao("depositar")
+                                
                             }}
                             descricao="Valor a ser depositado"
                             tipo="Depositar"
@@ -71,8 +79,9 @@ export default function Page() {
                             onChange={handleChange}
                             valor={valor}
                             funcaoBotao={() => {
-                                setEstadoPagina("carregando")
+                                setEstado("carregando")
                                 setTransacao("sacar")
+                                
                             }}
                             descricao="Valor a ser sacado"
                             tipo="Sacar"

@@ -1,10 +1,12 @@
 
+import { useEstado } from "@/app/Context/EstadoContext";
 import { useSaldo } from "@/app/Context/SaldoContext";
 import { useLocalStorage } from "@/app/Hooks/useLocalStorage";
 import { handleTransacao } from "@/app/Utils/handleTransacao";
 import { useEffect } from "react";
-export default function Carregamento({ tipoTransacao, valor, finalVerificacao, estadoPagina }) {
+export default function Carregamento({ tipoTransacao, valor, finalVerificacao }) {
     const { saldo } = useSaldo();
+    const {setEstado} = useEstado();
     const [extrato, setExtrato] = useLocalStorage("extrato", []);
     const { depositarSaldo, sacarSaldo } = useSaldo();
 
@@ -13,7 +15,7 @@ export default function Carregamento({ tipoTransacao, valor, finalVerificacao, e
         finalVerificacao(tipoTransacao);
 
         let time = setTimeout(() => {
-            finalTransacao.estado === "erro" ? estadoPagina("erro") : estadoPagina("sucesso")
+            finalTransacao.estado === "erro" ? setEstado("erro") : setEstado("sucesso")
         },6000);
 
         return () => clearTimeout(time);

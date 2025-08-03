@@ -20,14 +20,11 @@ export function handleTransacao(valor, tipoTransacao, setExtrato, depositar, sac
         setExtrato(prev => [...prev, relatorio]);
         tipoTransacao === "depositar" ? depositar(valorAlteracao) : sacar(valorAlteracao);
         
-        console.log(valor.toLocaleString("pt-br",{minimumFractionDigits: 2,maximunFractionDigits: 2}),saldo.toLocaleString("pt-br",{minimumFractionDigits: 2,maximunFractionDigits: 2}));
        return {transacao: "Transação feita com sucesso.", estado: "sucesso", tipoTransacao: tipoTransacao === "depositar" ? `Você depositou ${valor}`: `Você sacou ${valor}`};
-       
 
     }
     catch (erro) {
-        console.error("Erro " + erro);
-        console.log(valor.toLocaleString("pt-br",{minimumFractionDigits: 2,maximunFractionDigits: 2}),saldo.toLocaleString("pt-br",{minimumFractionDigits: 2,maximunFractionDigits: 2}));
+       
         return {transacao: "Erro ao realizar transação. Saldo insuficiente.", estado: "erro"};
     }
 
