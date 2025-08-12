@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <CardConta 
-      value={saldo.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+      value={saldo.toLocaleString("pt-br",{minimumFractionDigits: 2,maximunFractionDigits: 2})}
       />
     </>
   );

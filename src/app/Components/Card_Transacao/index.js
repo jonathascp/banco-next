@@ -20,7 +20,7 @@ export default function CardTransacao({ valor, onChange, inputRef, funcaoBotao,d
                     placeholder="R$ 0,00"
                 />
                 </div>
-                <button className={styles.button} onClick={funcaoBotao}>{tipo}</button>
+                <button disabled={valor < 500 ? true : false} className={styles.button} onClick={funcaoBotao}>{tipo}</button>
         </div>
     )
 }

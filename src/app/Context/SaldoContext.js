@@ -6,8 +6,12 @@ const SaldoContext = createContext();
 export const SaldoProvider = ({ children }) => {
     const [saldo, setSaldo] = useState(5000);
 
+    if(saldo < 0) {
+        setSaldo(0);
+    }
     const sacarSaldo = (valor) => {
         setSaldo(prev => prev -= valor);
+        console.log("Função ativa");
     }
 
     const depositarSaldo = (valor) => {

@@ -6,6 +6,7 @@ import Carregamento from "../Components/Carregamento";
 import Erro from "../Components/Erro";
 import Sucesso from "../Components/Sucesso";
 import { useEstado } from "../Context/EstadoContext";
+import { useSaldo } from "../Context/SaldoContext";
 
 export default function Page() {
     const {estado,setEstado} = useEstado(); 
@@ -13,12 +14,13 @@ export default function Page() {
     const [depositar, setDepositar] = useState(false);
     const [valor, setValor] = useState(0);
     const [tipoVerificado,setTipoVerificado] = useState({});
+    const {saldo} = useSaldo();
     const inputRef = useRef(null);
 
     const handleChange = (e) => {
         const valorBruto = e.target.value.replace(/\D/g, "");
-        setValor(valorBruto);
-
+        setValor(Number(valorBruto));
+        console.log(valorBruto);
         setTimeout(() => {
             const input = inputRef.current;
             if (input) {
@@ -60,6 +62,7 @@ export default function Page() {
                             Depositar
                         </button>
                     </div>
+                    
                     {depositar == true ?
                         <CardTransacao
                             inputRef={inputRef}
@@ -77,11 +80,11 @@ export default function Page() {
                         <CardTransacao
                             inputRef={inputRef}
                             onChange={handleChange}
-                            valor={valor}
+                            valor={Number(valor)}
                             funcaoBotao={() => {
                                 setEstado("carregando")
                                 setTransacao("sacar")
-                                
+                                console.log( saldo , valor);
                             }}
                             descricao="Valor a ser sacado"
                             tipo="Sacar"
