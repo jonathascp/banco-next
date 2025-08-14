@@ -84,7 +84,7 @@ export default function Page() {
                             funcaoBotao={() => {
                                 setEstado("carregando")
                                 setTransacao("sacar")
-                                console.log( saldo , valor);
+                                
                             }}
                             descricao="Valor a ser sacado"
                             tipo="Sacar"

@@ -1,4 +1,3 @@
-
 export function handleTransacao(valor, tipoTransacao, setExtrato, depositar, sacar, saldo) {
     const date = new Date();
     const dia = date.getDate().toString().padStart(2, "0");
@@ -13,19 +12,21 @@ export function handleTransacao(valor, tipoTransacao, setExtrato, depositar, sac
     }
 
     try {
-        if (tipoTransacao === "sacar" && Number(valor.toLocaleString("pt-br",{minimumFractionDigits: 2,maximunFractionDigits: 2})) > saldo.toLocaleString("pt-br",{minimumFractionDigits: 2,maximunFractionDigits: 2})) {
+        if (tipoTransacao === "sacar" && valorAlteracao > saldo) {
+            console.log(valorAlteracao,saldo)
             throw new Error("Saldo insuficiente para saque.");
+            
         }
-        
+
         setExtrato(prev => [...prev, relatorio]);
         tipoTransacao === "depositar" ? depositar(valorAlteracao) : sacar(valorAlteracao);
-        
-       return {transacao: "Transação feita com sucesso.", estado: "sucesso", tipoTransacao: tipoTransacao === "depositar" ? `Você depositou ${valor}`: `Você sacou ${valor}`};
+
+        return { transacao: "Transação feita com sucesso.", estado: "sucesso", tipoTransacao: tipoTransacao === "depositar" ? `Você depositou ${valor}` : `Você sacou ${valor}` };
 
     }
     catch (erro) {
-       
-        return {transacao: "Erro ao realizar transação. Saldo insuficiente.", estado: "erro"};
+
+        return { transacao: "Erro ao realizar transação. Saldo insuficiente.", estado: "erro" };
     }
 
 }
